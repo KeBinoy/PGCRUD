@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2016 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+    <!-- Good default declaration:
+    * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+    * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+        * Enable inline JS: add 'unsafe-inline' to default-src
+        * Enable eval(): add 'unsafe-eval' to default-src
+    * Create your own at http://cspisawesome.com
+    -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+
+    <!-- <link rel="stylesheet" type="text/css" href="css/index.css" /> -->
+    <title>Student Information</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css" >
+    <link rel="stylesheet" href="css/jquery.dataTables.min.css">    
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-1.12.4.min.js"></script>
+    <script src="js/jquery.dataTables.min.js"></script>
+    <script src="js/dataTable.js"></script>
+</head>
+
+<body>
+    <div class="container">
+      <div class="row">
+            <div class="col-sm-4">
+              <h2>Kevin John A. Rivera</h2>
+            </div>
+            <div class="col-sm-4">
+              <h2>MIT-Student</h2>
+            </div>
+            <div class="col-sm-4">
+             <h2>PGCRUD-101</h2>
+            </div>
+      </div>
+      <div class="panel-group">
+
+          <div class="panel panel-primary">
+              <div class="panel-heading">Student Information</div>
+              <div class="panel-body">
+                  <form action="javascript:void(0);" method="POST" onsubmit="app.Add()"> 
+                      <div class="row">
+                            <div class="col-sm-4">
+                              <input type="text" id="add-firstname" class="form-control"  placeholder="Enter Firstname" REQUIRED>
+                            </div>
+                            <div class="col-sm-4" style="text-align:right;">
+                              <input type="text" id="add-lastname" class="form-control"  placeholder="Enter Lastname" REQUIRED>
+                            </div>
+                            <div class="col-sm-3" style="text-align:right;">
+                              <!-- <input type="text" id="add-course" class="form-control"  placeholder="Enter Course" REQUIRED> -->
+                              <select id="add-course" class="form-control" REQUIRED>
+                                <option value="">Select Course</option>
+                                <option value="BSIT">BSIT</option>
+                                <option value="BSIS">BSIS</option>
+                                <option value="BSIM">BSIM</option>
+                                <option value="BSCS">BSCS</option>
+                              </select>
+                            </div>
+                            <div class="col-sm-1" style="text-align:center;">
+                                  <button type="submit" style="border: 0; background: transparent">
+                                      <img src="img/add.png" width="35" height="35" alt="submit" />
+                                  </button>
+                            </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+              
+          <br/>
+          <div id="spoiler" role="aria-hidden">
+
+              <div class="panel panel-info">
+                  <div class="panel-heading">
+                      <div class="row">
+                        <div class="col-sm-11">Update Student Information</div>
+                        <div class="col-sm-1" style="text-align:right;"><a onclick="CloseInput()" aria-label="Close">&#10006;</a></div>
+                      </div>
+                  </div>
+                  <div class="panel-body">
+                      <form action="javascript:void(0);" method="POST" id="saveEdit">
+                                                
+                         <div class="row">
+                            <div class="col-sm-4">
+                              <input type="text" id="edit-firstname" class="form-control" REQUIRED>
+                            </div>
+                            <div class="col-sm-4" style="text-align:right;">
+                               <input type="text" id="edit-lastname" class="form-control" REQUIRED>
+                            </div>
+
+                            <div class="col-sm-3" style="text-align:right;">
+                               <!-- <input type="text" id="edit-course" class="form-control" REQUIRED> -->
+
+                               <select id="edit-course" class="form-control" REQUIRED>
+                                <option value="">Select Course</option>
+                                <option value="BSIT" selected>BSIT</option>
+                                <option value="BSIS" selected>BSIS</option>
+                                <option value="BSIM" selected>BSIM</option>
+                                <option value="BSCS" selected>BSCS</option>
+                              </select>
+                            </div>
+                            <div class="col-sm-1" style="text-align:center;">
+                                  <button type="submit" style="border: 0; background: transparent">
+                                      <img src="img/save.png" width="25" height="25" alt="submit" />
+                                  </button>
+                            </div>
+                      </div>
+                    </form>
+                  </div>
+              </div>
+          <br/>
+
+          </div>
+          <div class="panel panel-primary">
+              <div class="panel-heading">Student List</div>
+              <div class="panel-body">
+                  <p id="counter"></p>
+
+                  <table id="myTable">
+                      <thead>
+                          <tr>
+                              <th>Name</th>
+                              <th style="text-align:center;">Course</th>
+                              <th style="text-align:center;">Action</th>
+                          </tr>
+                      </thead>
+                      <tfoot>
+                          <tr>
+                              <th>Name</th>
+                              <th style="text-align:center;">Course</th>
+                              <th style="text-align:center;">Action</th>
+                          </tr>
+                      </tfoot>
+                      <tbody id="lname">
+                      </tbody>
+                  </table>
+
+              </div>
+          </div>
+
+      </div>
+  </div>
+  <script src="js/crud.js"></script>
+</body>
+
+</html>

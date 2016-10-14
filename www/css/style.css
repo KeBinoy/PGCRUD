@@ -1,0 +1,26 @@
+
+    input[type='submit'], button, [aria-label]{
+      cursor: pointer;
+    }
+    #spoiler{
+      display: none;
+    }
+    #myTable{
+        width:100%; 
+        border-collapse:collapse; 
+    }
+    #myTable td{ 
+        padding:7px; border:#000 1px solid;
+    }
+    /* provide some minimal visual accomodation for IE8 and below */
+    #myTable tr{
+        background: #fff;
+    }
+    /*  Define the background color for all the ODD background rows  */
+    #myTable tr:nth-child(odd){ 
+        background: #fff;
+    }
+    /*  Define the background color for all the EVEN background rows  */
+    #myTable tr:nth-child(even){
+        background: #CCC;
+    }
